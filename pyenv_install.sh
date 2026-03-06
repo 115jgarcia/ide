@@ -21,3 +21,4 @@ else
 fi
 
 echo "Done. Run 'pyenv --version' to verify."
+echo "Or install python 'pyenv install 3.10.4'"
