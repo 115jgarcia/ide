@@ -16,9 +16,12 @@ if command -v nvim &>/dev/null; then
   fi
 fi
 
-curl -LO https://github.com/neovim/neovim/releases/download/v0.11.6/nvim-linux-x86_64.tar.gz
+TMP_DIR="/tmp/installs"
+mkdir -p "${TMP_DIR}"
+
+curl -LO --output-dir "${TMP_DIR}" https://github.com/neovim/neovim/releases/download/v0.11.6/nvim-linux-x86_64.tar.gz
 sudo rm -rf /opt/nvim-linux-x86_64
-sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
+sudo tar -C /opt -xzf "${TMP_DIR}/nvim-linux-x86_64.tar.gz"
 
 echo 'export PATH="/opt/nvim-linux-x86_64/bin:$PATH"' >> ~/.bashrc
 echo "Done. Run 'nvim --version' to verify."
