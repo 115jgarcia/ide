@@ -15,6 +15,7 @@ Personal scripts for setting up an IDE environment on Ubuntu 24.04.
 | 2 | `homebrew_install.sh` | Installs Homebrew |
 | 3 | `pyenv_install.sh` | Installs pyenv and Python build dependencies |
 | 4 | `neovim_install.sh` | Installs Neovim 0.11 |
+| 5 | `lazyvim_install.sh` | Install LazyVim | 
 
 ## Usage
 
