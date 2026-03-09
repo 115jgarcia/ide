@@ -16,7 +16,7 @@ if command -v nvim &>/dev/null; then
   fi
 fi
 
-TMP_DIR="/tmp/installs"
+TMP_DIR="/tmp/install/nvim"
 mkdir -p "${TMP_DIR}"
 
 curl -LO --output-dir "${TMP_DIR}" https://github.com/neovim/neovim/releases/download/v0.11.6/nvim-linux-x86_64.tar.gz
