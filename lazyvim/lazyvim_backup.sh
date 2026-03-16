@@ -6,8 +6,9 @@ mkdir -p "$BACKUP_DIR"
 
 backup_dir () {
   if [[ -d "$1" ]]; then
-    echo "Backing up $1 → $BACKUP_DIR"
-    mv "$1" "$BACKUP_DIR/"
+    name="$(echo "$1" | sed "s|$HOME/||" | tr '/' '_')"
+    echo "Backing up $1 → $BACKUP_DIR/$name"
+    cp -r "$1" "$BACKUP_DIR/$name"
   fi
 }
 
