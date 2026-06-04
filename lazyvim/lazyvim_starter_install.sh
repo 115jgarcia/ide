@@ -25,7 +25,7 @@ revert_backups() {
 trap revert_backups ERR
 
 # Install dependencies
-sudo apt-get install unzip
+sudo apt-get install unzip xclip
 
 # Clone LazyVim starter
 echo "Cloning LazyVim starter..."
