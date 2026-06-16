@@ -13,19 +13,58 @@ Personal scripts for setting up an IDE environment on Ubuntu 24.04.
 |-------|--------|-------------|
 | 1 | `basic_update.sh` | Updates and upgrades apt packages |
 | 2 | `homebrew_install.sh` | Installs Homebrew |
-| 3 | `pyenv_install.sh` | Installs pyenv and Python build dependencies |
-| 4 | `neovim_install.sh` | Installs Neovim 0.11 |
-| 5 | `lazyvim_install.sh` | Install LazyVim | 
+| 3 | `pyenv/pyenv_install.sh` | Installs pyenv and Python build dependencies |
+| 4 | `lazyvim/install.sh` | Full Neovim + LazyVim orchestrator (recommended) |
+
+### Neovim + LazyVim — individual scripts (run in order)
+
+| Order | Script | Description |
+|-------|--------|-------------|
+| 1 | `lazyvim/neovim_install.sh` | Installs Neovim 0.11.6 to `/opt/nvim-linux-x86_64` and adds it to `~/.bashrc` |
+| 2 | `lazyvim/lazyvim_dep.sh` | Installs NVM, Node 24, and Go (required for LSPs) |
+| 3 | `lazyvim/lazyvim_starter_install.sh` | Clones the LazyVim starter config |
+| 4 | `lazyvim/lazyvim_install.sh` | Copies plugin and LSP config files into `~/.config/nvim` |
+
+### Uninstall
+
+| Script | Description |
+|--------|-------------|
+| `lazyvim/neovim_uninstall.sh` | Removes Neovim binary and all config/data/cache dirs. Requires sudo and date confirmation. |
+
+> **Note:** The uninstall script does not modify `~/.bashrc`. After running it, manually remove the following line from your shell config:
+> ```
+> export PATH="/opt/nvim-linux-x86_64/bin:$PATH"
+> ```
+> Then run `source ~/.bashrc` (or restart your shell).
+
+## LSPs & Linters
+
+| Language | LSP | Linter/Formatter |
+|----------|-----|-----------------|
+| Python | `pyright` | `ruff` |
+| SQL | `dadbod` (database client) | `sqlfluff` |
+| YAML | `yaml-language-server` | — |
+| Lua | `lua-language-server` | `stylua` |
+| Shell | — | `shfmt` |
 
 ## Usage
 
-Run individually:
+**Full Neovim + LazyVim install (recommended):**
 ```bash
-chmod +x script.sh
-./script.sh
+bash lazyvim/install.sh
+```
+This backs up any existing config, then runs all four steps in order.
+
+**Individual scripts:**
+```bash
+bash lazyvim/neovim_install.sh
+bash lazyvim/lazyvim_dep.sh
+bash lazyvim/lazyvim_starter_install.sh
+bash lazyvim/lazyvim_install.sh
 ```
 
-Run all in order:
+**Uninstall:**
 ```bash
-chmod +x *.sh && ./basic_update.sh && ./homebrew_install.sh && ./pyenv_install.sh && ./neovim_install.sh
+bash lazyvim/neovim_uninstall.sh
 ```
+Requires sudo. You will be prompted to enter today's date (MM/DD) to confirm.
