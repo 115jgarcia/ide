@@ -17,6 +17,16 @@ Personal scripts for setting up an IDE environment on Ubuntu 24.04.
 | 4 | `neovim_install.sh` | Installs Neovim 0.11 |
 | 5 | `lazyvim_install.sh` | Install LazyVim | 
 
+## LSPs & Linters
+
+| Language | LSP | Linter/Formatter |
+|----------|-----|-----------------|
+| Python | `pyright` | `ruff` |
+| SQL | `dadbod` (database client) | `sqlfluff` |
+| YAML | `yaml-language-server` | — |
+| Lua | `lua-language-server` | `stylua` |
+| Shell | — | `shfmt` |
+
 ## Usage
 
 Run individually:
