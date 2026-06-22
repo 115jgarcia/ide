@@ -6,3 +6,5 @@
 - Backup neovim config.
     - Maybe branch from fork w/ custom
 - Add `sqlcmd` install script (required for dadbod to connect to SQL Server)
+- Add steps to install `dbt-language-server`
+  - w/ Neovim/LazyVim configuration
