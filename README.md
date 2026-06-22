@@ -23,7 +23,7 @@ Personal scripts for setting up an IDE environment on Ubuntu 24.04.
 | 1 | `lazyvim/neovim_install.sh` | Installs Neovim 0.11.6 to `/opt/nvim-linux-x86_64` and adds it to `~/.bashrc` |
 | 2 | `lazyvim/lazyvim_dep.sh` | Installs NVM, Node 24, and Go (required for LSPs) |
 | 3 | `lazyvim/lazyvim_starter_install.sh` | Clones the LazyVim starter config |
-| 4 | `lazyvim/lazyvim_install.sh` | Copies plugin and LSP config files into `~/.config/nvim` |
+| 4 | `lazyvim/lazyvim_config.sh` | Copies plugin and LSP config files into `~/.config/nvim` |
 
 ### Uninstall
 
@@ -42,7 +42,7 @@ Personal scripts for setting up an IDE environment on Ubuntu 24.04.
 | Language | LSP | Linter/Formatter |
 |----------|-----|-----------------|
 | Python | `pyright` | `ruff` |
-| SQL | `dadbod` (database client) | `sqlfluff` |
+| SQL | — | `sqlfluff` |
 | YAML | `yaml-language-server` | — |
 | Lua | `lua-language-server` | `stylua` |
 | Shell | — | `shfmt` |
@@ -60,7 +60,7 @@ This backs up any existing config, then runs all four steps in order.
 bash lazyvim/neovim_install.sh
 bash lazyvim/lazyvim_dep.sh
 bash lazyvim/lazyvim_starter_install.sh
-bash lazyvim/lazyvim_install.sh
+bash lazyvim/lazyvim_config.sh
 ```
 
 **Uninstall:**

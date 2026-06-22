@@ -21,7 +21,4 @@ bash "${SCRIPT_DIR}/lazyvim_dep.sh"
 echo "==> Installing LazyVim starter..."
 bash "${SCRIPT_DIR}/lazyvim_starter_install.sh"
 
-echo "==> Installing config..."
-bash "${SCRIPT_DIR}/lazyvim_install.sh"
-
 echo "==> Done. Open Neovim and run :checkhealth lazy to verify."
