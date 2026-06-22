@@ -42,7 +42,7 @@ Personal scripts for setting up an IDE environment on Ubuntu 24.04.
 | Language | LSP | Linter/Formatter |
 |----------|-----|-----------------|
 | Python | `pyright` | `ruff` |
-| SQL | `dadbod` (database client) | `sqlfluff` |
+| SQL | `dbtls/sqls` | `sqlfluff` |
 | YAML | `yaml-language-server` | — |
 | Lua | `lua-language-server` | `stylua` |
 | Shell | — | `shfmt` |
