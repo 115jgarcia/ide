@@ -28,7 +28,7 @@ fi
 
 # Clone LazyVim starter
 echo "Cloning LazyVim starter..."
-git clone --branch v1.1.0 --depth 1 https://github.com/115jgarcia/lazyVimStarter.git ~/.config/nvim > /dev/null 2>&1
+git clone --branch v1.1.1 --depth 1 https://github.com/115jgarcia/lazyVimStarter.git ~/.config/nvim > /dev/null 2>&1
 rm -rf ~/.config/nvim/.git
 
 # Cleanup temp on success
