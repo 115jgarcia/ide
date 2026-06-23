@@ -7,6 +7,7 @@ set -e
 NVM_VERSION="v0.40.4"
 NODE_VERSION="24.14.0"
 GO_VERSION="1.26.1"
+LAZYGIT_VERSION="0.44.1"
 
 # -----------------------------
 # Install NVM
@@ -58,7 +59,7 @@ export PATH=$PATH:/usr/local/go/bin
 # -----------------------------
 # Install dependencies
 # -----------------------------
-sudo apt-get install -y unzip xclip fd-find
+sudo apt-get install -y unzip xclip fd-find ripgrep fzf
 
 # fd-find installs as fdfind on Debian/Ubuntu; alias it to fd
 if command -v fdfind >/dev/null 2>&1 && [ ! -e "$HOME/.local/bin/fd" ]; then
@@ -71,6 +72,22 @@ if ! grep -q "$HOME/.local/bin" "$HOME/.bashrc"; then
 fi
 
 export PATH="$HOME/.local/bin:$PATH"
+
+# -----------------------------
+# Install Lazygit
+# -----------------------------
+if ! command -v lazygit >/dev/null 2>&1; then
+  echo "Installing Lazygit $LAZYGIT_VERSION..."
+
+  LAZYGIT_ARCH=$(uname -m | sed -e 's/aarch64/arm64/')
+  LAZYGIT_TAR="lazygit_${LAZYGIT_VERSION}_Linux_${LAZYGIT_ARCH}.tar.gz"
+
+  curl -fsLO "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/${LAZYGIT_TAR}"
+  tar xf "${LAZYGIT_TAR}" lazygit
+  sudo install lazygit -D -t /usr/local/bin/
+
+  rm -f "${LAZYGIT_TAR}" lazygit
+fi
 
 # -----------------------------
 # Done
