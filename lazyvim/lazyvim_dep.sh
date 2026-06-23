@@ -8,7 +8,7 @@ NVM_VERSION="v0.40.4"
 NODE_VERSION="24.14.0"
 GO_VERSION="1.26.1"
 LAZYGIT_VERSION="0.44.1"
-
+UBUNTU_VERSION="20.04"
 # -----------------------------
 # Install NVM
 # -----------------------------
@@ -51,7 +51,7 @@ fi
 # Ensure Go PATH
 # -----------------------------
 if ! grep -q "/usr/local/go/bin" "$HOME/.bashrc"; then
-  echo 'export PATH=$PATH:/usr/local/go/bin' >> "$HOME/.bashrc"
+  echo 'export PATH=$PATH:/usr/local/go/bin' >>"$HOME/.bashrc"
 fi
 
 export PATH=$PATH:/usr/local/go/bin
@@ -68,7 +68,7 @@ if command -v fdfind >/dev/null 2>&1 && [ ! -e "$HOME/.local/bin/fd" ]; then
 fi
 
 if ! grep -q "$HOME/.local/bin" "$HOME/.bashrc"; then
-  echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$HOME/.bashrc"
+  echo 'export PATH="$HOME/.local/bin:$PATH"' >>"$HOME/.bashrc"
 fi
 
 export PATH="$HOME/.local/bin:$PATH"
@@ -87,6 +87,19 @@ if ! command -v lazygit >/dev/null 2>&1; then
   sudo install lazygit -D -t /usr/local/bin/
 
   rm -f "${LAZYGIT_TAR}" lazygit
+fi
+
+# ---------------------------------
+# Install sqlcmd
+# ---------------------------------
+
+if ! command -v sqlcmd >/dev/null 2>&1; then
+  echo "Installing sqlcmd..."
+
+  curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | sudo tee /etc/apt/trusted.gpg.d/microsoft.asc
+  sudo add-apt-repository "$(wget -qO- https://packages.microsoft.com/config/ubuntu/${UBUNTU_VERSION}/prod.list)"
+  sudo apt-get update
+  sudo apt-get install -y sqlcmd
 fi
 
 # -----------------------------
