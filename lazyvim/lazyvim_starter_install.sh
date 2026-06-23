@@ -26,9 +26,6 @@ if [[ "${SKIP_BACKUP:-false}" != "true" ]]; then
   trap revert_backups ERR
 fi
 
-# Install dependencies
-sudo apt-get install unzip xclip
-
 # Clone LazyVim starter
 echo "Cloning LazyVim starter..."
 git clone --branch v1.1.0 --depth 1 https://github.com/115jgarcia/lazyVimStarter.git ~/.config/nvim > /dev/null 2>&1

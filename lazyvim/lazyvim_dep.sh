@@ -56,6 +56,23 @@ fi
 export PATH=$PATH:/usr/local/go/bin
 
 # -----------------------------
+# Install dependencies
+# -----------------------------
+sudo apt-get install -y unzip xclip fd-find
+
+# fd-find installs as fdfind on Debian/Ubuntu; alias it to fd
+if command -v fdfind >/dev/null 2>&1 && [ ! -e "$HOME/.local/bin/fd" ]; then
+  mkdir -p "$HOME/.local/bin"
+  ln -s "$(which fdfind)" "$HOME/.local/bin/fd"
+fi
+
+if ! grep -q "$HOME/.local/bin" "$HOME/.bashrc"; then
+  echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$HOME/.bashrc"
+fi
+
+export PATH="$HOME/.local/bin:$PATH"
+
+# -----------------------------
 # Done
 # -----------------------------
 echo "Setup complete!"
