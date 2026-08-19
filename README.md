@@ -20,9 +20,9 @@ Personal scripts for setting up an IDE environment on Ubuntu 24.04.
 
 | Order | Script | Description |
 |-------|--------|-------------|
-| 1 | `lazyvim/neovim_install.sh` | Installs Neovim 0.11.6 to `/opt/nvim-linux-x86_64` and adds it to `~/.bashrc` |
+| 1 | `lazyvim/neovim_install.sh` | Installs Neovim 0.12.4 to `/opt/nvim-linux-x86_64` and adds it to `~/.bashrc` |
 | 2 | `lazyvim/lazyvim_dep.sh` | Installs NVM, Node 24, and Go (required for LSPs) |
-| 3 | `lazyvim/lazyvim_starter_install.sh` | Clones the LazyVim starter config |
+| 3 | `lazyvim/lazyvim_starter_install.sh` | Clones [custom LazyVim starter](https://github.com/115jgarcia/lazyVimStarter) config |
 | 4 | `lazyvim/lazyvim_config.sh` | Copies plugin and LSP config files into `~/.config/nvim` |
 
 ### Uninstall
@@ -36,16 +36,6 @@ Personal scripts for setting up an IDE environment on Ubuntu 24.04.
 > export PATH="/opt/nvim-linux-x86_64/bin:$PATH"
 > ```
 > Then run `source ~/.bashrc` (or restart your shell).
-
-## LSPs & Linters
-
-| Language | LSP | Linter/Formatter |
-|----------|-----|-----------------|
-| Python | `pyright` | `ruff` |
-| SQL | — | `sqlfluff` |
-| YAML | `yaml-language-server` | — |
-| Lua | `lua-language-server` | `stylua` |
-| Shell | — | `shfmt` |
 
 ## Usage
 
