@@ -15,6 +15,7 @@ Personal scripts for setting up an IDE environment on Ubuntu 24.04.
 | 2 | `homebrew_install.sh` | Installs Homebrew |
 | 3 | `pyenv/pyenv_install.sh` | Installs pyenv and Python build dependencies |
 | 4 | `lazyvim/install.sh` | Full Neovim + LazyVim orchestrator (recommended) |
+| 5 | `tmux/install_tmux.sh` | Installs tmux and TPM (Tmux Plugin Manager) |
 
 ### Neovim + LazyVim — individual scripts (run in order)
 
@@ -37,6 +38,15 @@ Personal scripts for setting up an IDE environment on Ubuntu 24.04.
 > ```
 > Then run `source ~/.bashrc` (or restart your shell).
 
+### Tmux
+
+| Script | Description |
+|--------|-------------|
+| `tmux/install_tmux.sh` | Installs tmux and TPM (Tmux Plugin Manager) |
+| `tmux/dev-v1.sh` | Creates/attaches to a `dev1` tmux session with an `editor` window running `nvim` |
+
+> **Note:** `dev-v1.sh` hardcodes `EDITOR_DIR="~"`. Edit the script to point at your project directory before running.
+
 ## Usage
 
 **Full Neovim + LazyVim install (recommended):**
@@ -58,3 +68,9 @@ bash lazyvim/lazyvim_config.sh
 bash lazyvim/neovim_uninstall.sh
 ```
 Requires sudo. You will be prompted to enter today's date (MM/DD) to confirm.
+
+**Tmux:**
+```bash
+bash tmux/install_tmux.sh
+bash tmux/dev-v1.sh
+```
