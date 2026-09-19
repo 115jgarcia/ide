@@ -1,0 +1,27 @@
+- name: Check whether Homebrew is installed
+  ansible.builtin.stat:
+    path: /home/linuxbrew/.linuxbrew/bin/brew
+  register: homebrew
+
+- name: Install Homebrew
+  when: not homebrew.stat.exists
+  ansible.builtin.shell:
+    cmd: |
+      NONINTERACTIVE=1 /bin/bash -c \
+        "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  changed_when: true
+
+- name: Install packages from Brewfile
+  ansible.builtin.command:
+    cmd: >
+      /home/linuxbrew/.linuxbrew/bin/brew
+      bundle
+      --file={{ playbook_dir }}/../../homebrew/Brewfile
+  register: brew_bundle
+  changed_when: "'Installing' in brew_bundle.stdout"
+
+- name: Ensure Homebrew is on PATH for interactive shells
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    line: 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
+    create: true

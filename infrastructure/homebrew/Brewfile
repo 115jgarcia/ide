@@ -1,0 +1,15 @@
+brew "mise"
+
+brew "bat"
+brew "fd"
+brew "fzf"
+brew "ripgrep"
+brew "xclip"
+brew "unzip"
+brew "sqlcmd"
+
+brew "pyenv"
+brew "tmux"
+
+brew "claude-code"
+cask "codex"
