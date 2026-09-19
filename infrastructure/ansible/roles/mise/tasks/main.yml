@@ -1,0 +1,17 @@
+- name: Create mise config directory
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.config/mise"
+    state: directory
+    mode: "0755"
+
+- name: Install mise configuration
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/../mise/mise.toml"
+    dest: "{{ ansible_env.HOME }}/.config/mise/config.toml"
+    mode: "0644"
+
+- name: Install mise-managed tools
+  ansible.builtin.command:
+    cmd: /home/linuxbrew/.linuxbrew/bin/mise install
+  register: mise_install
+  changed_when: "'installed' in mise_install.stdout"
