@@ -21,7 +21,11 @@
   changed_when: "'Installing' in brew_bundle.stdout"
 
 - name: Ensure Homebrew is on PATH for interactive shells
-  ansible.builtin.lineinfile:
+  ansible.builtin.blockinfile:
     path: "{{ ansible_env.HOME }}/.bashrc"
-    line: 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
+    marker: "# {mark} Homebrew"
+    block: |
+      if [[ -x /home/linuxbrew/.linuxbrew/bin/brew ]]; then
+        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+      fi
     create: true
