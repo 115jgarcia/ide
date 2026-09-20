@@ -15,3 +15,13 @@
     cmd: /home/linuxbrew/.linuxbrew/bin/mise install
   register: mise_install
   changed_when: "'installed' in mise_install.stdout"
+
+- name: Ensure mist is on PATH for interactive shells
+  ansible.builtin.blockinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    marker: "# {mark} mise"
+    block: |
+      if command -v mise >/dev/null 2>&1; then
+        eval "$(mise activate bash)"
+      fi
+    create: true
