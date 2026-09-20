@@ -11,5 +11,5 @@ brew "sqlcmd"
 brew "pyenv"
 brew "tmux"
 
-brew "claude-code"
+cask "claude"
 cask "codex"
