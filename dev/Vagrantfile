@@ -1,0 +1,24 @@
+# -*- mode: ruby -*-
+Vagrant.configure("2") do |config|
+  config.vm.box = "cloud-image/ubuntu-24.04"
+
+  # Default /vagrant sync is unused; we sync the whole repo explicitly below.
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+
+  config.vm.synced_folder "..", "/home/vagrant/ide",
+    type: "rsync",
+    rsync__exclude: [".git/", "dev/.vagrant/"],
+    rsync__args: ["--verbose", "--archive", "--delete", "-z"]
+
+  config.vm.provider :libvirt do |lv|
+    lv.memory = 4096
+    lv.cpus = 2
+  end
+
+  # Unprivileged: bootstrap.sh sudo's for system-level tasks itself, and the
+  # homebrew role must NOT run as root (the Homebrew installer refuses to).
+  config.vm.provision "shell", privileged: false, inline: <<-SHELL
+    set -euo pipefail
+    bash /home/vagrant/ide/infrastructure/bootstrap.sh
+  SHELL
+end
