@@ -1,0 +1,13 @@
+- name: Install core system packages
+  ansible.builtin.apt:
+    name:
+      - build-essential
+      - ca-certificates
+      - curl
+      - openssh-server
+      - procps
+      - file
+      - git
+      - make
+    state: present
+    update_cache: true

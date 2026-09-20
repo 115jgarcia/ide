@@ -1,0 +1,16 @@
+- name: Configure workstation
+  hosts: local
+  become: true
+
+  roles:
+    - core
+    - pyenv-build
+    - docker
+
+- name: Configure user environment
+  hosts: local
+  become: false
+
+  roles:
+    - homebrew
+    - mise

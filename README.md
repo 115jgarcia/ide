@@ -7,54 +7,48 @@ Personal scripts for setting up an IDE environment on Ubuntu 24.04.
 - Ubuntu 24.04
 - A non-root user with `sudo` privileges
 
-## Scripts
+## Infrastructure
 
-| Order | Script | Description |
-|-------|--------|-------------|
-| 1 | `basic_update.sh` | Updates and upgrades apt packages |
-| 2 | `homebrew_install.sh` | Installs Homebrew |
-| 3 | `pyenv/pyenv_install.sh` | Installs pyenv and Python build dependencies |
-| 4 | `lazyvim/install.sh` | Full Neovim + LazyVim orchestrator (recommended) |
+Machine setup now lives in [`infrastructure/`](infrastructure/) and is split across three tools:
 
-### Neovim + LazyVim — individual scripts (run in order)
+| Tool | Responsibility |
+|------|----------------|
+| **Ansible** | System-level provisioning: OS packages, repos, services, Docker, permissions |
+| **Homebrew** | User-level CLI utilities that don't need strict version pinning ([`Brewfile`](infrastructure/homebrew/Brewfile)) |
+| **mise** | Version-pinned dev tools/runtimes: Node, Go, Neovim, lazygit ([`mise.toml`](infrastructure/ansible/mise/mise.toml)) |
 
-| Order | Script | Description |
-|-------|--------|-------------|
-| 1 | `lazyvim/neovim_install.sh` | Installs Neovim 0.12.4 to `/opt/nvim-linux-x86_64` and adds it to `~/.bashrc` |
-| 2 | `lazyvim/lazyvim_dep.sh` | Installs NVM, Node 24, and Go (required for LSPs) |
-| 3 | `lazyvim/lazyvim_starter_install.sh` | Clones [custom LazyVim starter](https://github.com/115jgarcia/lazyVimStarter) config |
-| 4 | `lazyvim/lazyvim_config.sh` | Copies plugin and LSP config files into `~/.config/nvim` |
+**Install:**
+```bash
+bash infrastructure/bootstrap.sh
+```
+This installs Ansible if missing, then runs the `workstation.yml` playbook, which provisions the system (core, pyenv-build, docker roles) and the user environment (homebrew, mise roles).
 
-### Uninstall
+## Neovim + LazyVim
 
 | Script | Description |
 |--------|-------------|
-| `lazyvim/neovim_uninstall.sh` | Removes Neovim binary and all config/data/cache dirs. Requires sudo and date confirmation. |
+| `lazyvim/install.sh` | Orchestrator: backs up any existing config, then runs `lazyvim_starter_install.sh` |
+| `lazyvim/lazyvim_starter_install.sh` | Clones the LazyVim starter config (called by `install.sh`, or run directly) |
+| `lazyvim/neovim_uninstall.sh` | Removes Neovim binary and all config/data/cache dirs. Requires sudo and date confirmation |
 
-> **Note:** The uninstall script does not modify `~/.bashrc`. After running it, manually remove the following line from your shell config:
+```bash
+bash lazyvim/install.sh
+```
+
+> **Note:** The uninstall script does not modify `~/.bashrc`. After running it, manually remove:
 > ```
 > export PATH="/opt/nvim-linux-x86_64/bin:$PATH"
 > ```
 > Then run `source ~/.bashrc` (or restart your shell).
 
-## Usage
+## Tmux
 
-**Full Neovim + LazyVim install (recommended):**
-```bash
-bash lazyvim/install.sh
-```
-This backs up any existing config, then runs all four steps in order.
+| Script | Description |
+|--------|-------------|
+| `tmux/dev-v1.sh` | Creates/attaches to a `dev1` tmux session with an `editor` window running `nvim` |
 
-**Individual scripts:**
 ```bash
-bash lazyvim/neovim_install.sh
-bash lazyvim/lazyvim_dep.sh
-bash lazyvim/lazyvim_starter_install.sh
-bash lazyvim/lazyvim_config.sh
+bash tmux/dev-v1.sh
 ```
 
-**Uninstall:**
-```bash
-bash lazyvim/neovim_uninstall.sh
-```
-Requires sudo. You will be prompted to enter today's date (MM/DD) to confirm.
+> **Note:** `dev-v1.sh` hardcodes `EDITOR_DIR="~"`. Edit the script to point at your project directory before running.

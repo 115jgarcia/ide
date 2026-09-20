@@ -12,12 +12,6 @@ source "${SCRIPT_DIR}/lazyvim_backup.sh"
 export SKIP_BACKUP=true
 
 # ── Steps ─────────────────────────────────────────────────────────────────────
-echo "==> Installing Neovim..."
-bash "${SCRIPT_DIR}/neovim_install.sh"
-
-echo "==> Installing dependencies..."
-bash "${SCRIPT_DIR}/lazyvim_dep.sh"
-
 echo "==> Installing LazyVim starter..."
 bash "${SCRIPT_DIR}/lazyvim_starter_install.sh"
 

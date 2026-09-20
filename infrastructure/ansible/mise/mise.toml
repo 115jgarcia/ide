@@ -1,0 +1,7 @@
+# mise.toml
+
+[tools]
+neovim = "0.12.4"
+node = "24.14"
+go = "1.26"
+lazygit = "0.44"
