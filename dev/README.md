@@ -20,6 +20,12 @@ sudo usermod -aG libvirt "$USER"   # log out/in (or `newgrp libvirt`) to apply
 vagrant plugin install vagrant-libvirt
 ```
 
+Vagrant defaults to VirtualBox, so tell it to use libvirt instead:
+
+```bash
+export VAGRANT_DEFAULT_PROVIDER=libvirt
+```
+
 ## Usage
 
 ```bash
