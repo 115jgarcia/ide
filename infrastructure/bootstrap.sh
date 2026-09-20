@@ -13,6 +13,7 @@ fi
 
 echo "==> Running workstation provisioning"
 
+cd "$ROOT/ansible"
 ansible-playbook \
-  -i "$ROOT/ansible/inventory.ini" \
-  "$ROOT/ansible/playbooks/workstation.yml"
+  -i inventory.ini \
+  playbooks/workstation.yml

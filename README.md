@@ -9,7 +9,7 @@ Personal scripts for setting up an IDE environment on Ubuntu 24.04.
 
 ## Infrastructure
 
-Machine setup now lives in [`infrastructure/`](infrastructure/) and is split across three tools (see [`infrastructure/CONTEXT.md`](infrastructure/CONTEXT.md)):
+Machine setup now lives in [`infrastructure/`](infrastructure/) and is split across three tools:
 
 | Tool | Responsibility |
 |------|----------------|
